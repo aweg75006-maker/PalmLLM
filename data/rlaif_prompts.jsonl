@@ -1,0 +1,51 @@
+{"prompt":"用一句话解释什么是梯度累积？"}
+{"prompt":"请用要点列出 MoE 的核心思想。"}
+{"prompt":"写一个Python函数，判断字符串是否为回文。"}
+{"prompt":"用通俗语言解释为什么需要偏好对齐（RLHF/DPO）。"}
+{"prompt":"请解释什么是注意力机制（Attention Mechanism）？"}
+{"prompt":"用简单的例子说明什么是过拟合（Overfitting）？"}
+{"prompt":"写一个Python函数，计算斐波那契数列的第n项。"}
+{"prompt":"请简述Transformer架构的主要组成部分。"}
+{"prompt":"什么是学习率调度器（Learning Rate Scheduler）？为什么需要它？"}
+{"prompt":"用通俗易懂的方式解释什么是反向传播算法。"}
+{"prompt":"写一个Python函数，实现快速排序算法。"}
+{"prompt":"请解释Batch Normalization的作用和原理。"}
+{"prompt":"什么是Dropout？它在深度学习中起什么作用？"}
+{"prompt":"用简单的语言解释什么是词嵌入（Word Embedding）。"}
+{"prompt":"写一个Python函数，找出列表中出现次数最多的元素。"}
+{"prompt":"请解释什么是残差连接（Residual Connection）？"}
+{"prompt":"什么是位置编码（Positional Encoding）？为什么Transformer需要它？"}
+{"prompt":"用通俗的例子解释什么是迁移学习。"}
+{"prompt":"写一个Python函数，判断两个字符串是否是字母异位词。"}
+{"prompt":"请解释什么是激活函数，列举几种常见的激活函数。"}
+{"prompt":"什么是交叉熵损失（Cross Entropy Loss）？"}
+{"prompt":"用简单的话解释什么是预训练语言模型。"}
+{"prompt":"写一个Python函数，实现二分查找算法。"}
+{"prompt":"请解释什么是梯度消失问题，以及如何解决它。"}
+{"prompt":"什么是Tokenization？为什么NLP任务需要做分词？"}
+{"prompt":"用通俗的语言解释什么是大语言模型（LLM）。"}
+{"prompt":"写一个Python函数，合并两个有序链表。"}
+{"prompt":"请解释什么是自注意力（Self-Attention）机制。"}
+{"prompt":"什么是数据增强（Data Augmentation）？举例说明。"}
+{"prompt":"用简单的例子解释什么是零样本学习（Zero-shot Learning）。"}
+{"prompt":"写一个Python函数，验证括号是否有效匹配。"}
+{"prompt":"请解释什么是困惑度（Perplexity），它在语言模型中有什么意义？"}
+{"prompt":"什么是Beam Search？它与贪婪搜索有什么区别？"}
+{"prompt":"用通俗的语言解释什么是提示工程（Prompt Engineering）。"}
+{"prompt":"写一个Python函数，找到数组中和为目标值的两个数。"}
+{"prompt":"请解释什么是多头注意力（Multi-Head Attention）。"}
+{"prompt":"什么是温度参数（Temperature）？它如何影响文本生成？"}
+{"prompt":"用简单的例子说明什么是少样本学习（Few-shot Learning）。"}
+{"prompt":"写一个Python函数，反转链表。"}
+{"prompt":"请解释什么是知识蒸馏（Knowledge Distillation）。"}
+{"prompt":"什么是Top-k采样和Top-p采样？它们在文本生成中的作用是什么？"}
+{"prompt":"用通俗的语言解释什么是思维链（Chain-of-Thought）。"}
+{"prompt":"写一个Python函数，判断一个数是否是质数。"}
+{"prompt":"请解释什么是上下文学习（In-context Learning）。"}
+{"prompt":"什么是模型量化（Model Quantization）？为什么要做量化？"}
+{"prompt":"用简单的例子解释什么是对话系统中的幻觉问题。"}
+{"prompt":"写一个Python函数，实现LRU缓存机制。"}
+{"prompt":"请解释什么是指令微调（Instruction Tuning）。"}
+{"prompt":"什么是检索增强生成（RAG）？它解决了什么问题？"}
+{"prompt":"用通俗的语言解释什么是模型的泛化能力。"}
+

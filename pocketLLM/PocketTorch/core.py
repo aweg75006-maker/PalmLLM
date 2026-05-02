@@ -1,0 +1,139 @@
+import numpy as np
+
+# 变量类
+# 从零手写的迷你深度学习自动微分框架
+class Variable:
+    def __init__(self, data):
+        if data is not None and not isinstance(data, np.ndarray):
+                raise TypeError(f"{type(data)} is not np.ndarray")
+
+        self.data = data
+        self.grad = None
+        self.creator = None
+        self.generation = 0 # 追踪变量的世代
+
+    def set_creator(self, func):
+        self.creator = func
+        self.generation = func.generation + 1 # 设置变量的世代为创建函数的世代加1
+
+    def backward(self):
+        if self.grad is None:
+            self.grad = np.ones_like(self.data) # 如果梯度没有计算过，则初始化为1
+
+        funcs = [] # 创建函数队列
+        seen_set = set() # 避免重复添加函数
+
+        def add_func(f):
+            if f not in seen_set:
+                funcs.append(f)
+                seen_set.add(f)
+                funcs.sort(key=lambda x: x.generation) # 按世代排序，确保先计算高世代的函数
+
+        add_func(self.creator) # 将当前变量的创建函数添加到队列中
+
+        while funcs:
+            f = funcs.pop() # 获取创建函数
+            gys = [output.grad for output in f.outputs] # 获取输出变量的梯度
+            gxs = f.backward(*gys) # 反向传播，计算输入变量的梯度
+            if not isinstance(gxs, tuple):
+                gxs = (gxs,) # 如果梯度不是元组，则将其转换为元组，以便统一处理
+
+            for x, gx in zip(f.inputs, gxs): # 遍历输入变量和梯度
+                if x.grad is None:
+                    x.grad = gx # 如果输入变量的梯度没有计算过，则初始化为梯度
+                else:
+                    x.grad = x.grad + gx # 如果输入变量的梯度已经计算过，则累加梯度
+            
+                if x.creator is not None:
+                    add_func(x.creator) # 将输入变量的创建函数添加到队列中
+
+    def cleargrad(self):
+        self.grad = None # 同一个变量应用在不同的函数时，需要清除梯度
+
+def as_array(x):
+    if np.isscalar(x):
+        return np.array(x)
+    return x
+
+# 函数类
+class Function:
+    def __call__(self, *inputs):
+        xs = [x.data for x in inputs] # 支持函数的多个输入
+        ys = self.forward(*xs) # 计算输出
+        if not isinstance(ys, tuple):
+            ys = (ys,) # 如果输出不是元组，则将其转换为元组，以便统一处理
+        outputs = [Variable(as_array(y)) for y in ys]
+
+        self.generation = max([x.generation for x in inputs]) # 设定函数的世代为输入变量中最大的世代加1
+        for output in outputs:
+            output.set_creator(self) # 设定输出变量的创建函数
+
+        self.inputs = inputs # 保存输入变量
+        self.outputs = outputs # 保存输出变量
+
+        return outputs if len(outputs) > 1 else outputs[0] # 如果输出变量只有一个，则返回单个变量，否则返回元组
+
+    # 前向传播
+    def forward(self, x):
+        raise NotImplementedError()
+    
+    # 反向传播
+    def backward(self, dout):
+        raise NotImplementedError()
+
+# 平方函数类
+class Square(Function):
+    def forward(self, x):
+        return x ** 2
+
+    def backward(self, dout):
+        x = self.inputs[0].data
+        dout = 2 * x * dout
+        return dout
+
+# 平方函数
+def square(x):
+    return Square()(x)
+
+# 指数函数类    
+class Exp(Function):
+    def forward(self, x):
+        return np.exp(x)
+
+    def backward(self, dout):
+        x = self.inputs[0].data
+        dout = np.exp(x) * dout
+        return dout
+
+# 指数函数  
+def exp(x):
+    return Exp()(x)
+
+# 加法函数类
+class Add(Function):
+    def forward(self, x0, x1):
+        return x0 + x1
+    
+    def backward(self, dout):
+        return dout, dout
+    
+# 加法函数
+def add(x0, x1):
+    return Add()(x0, x1)
+
+# 数值微分
+# 可以用数值微分的结果来检验反向传播的正确性，也叫梯度检验
+def numerical_diff(f, x, eps=1e-4):
+    x0 = Variable(x.data - eps)
+    x1 = Variable(x.data + eps)
+    y0 = f(x0)
+    y1 = f(x1)
+    return (y1.data - y0.data) / (2 * eps)
+
+x = Variable(np.array(2.0))
+a = square(x)
+y = add(square(a), square(a))
+y.backward()
+
+print(y.data)
+print(x.grad)
