@@ -6,7 +6,7 @@ PalmLLM 是一个面向学习、实验和单卡受限算力场景的轻量级大
 - **pocketLLM 教学链路**：从零手写 GPT 风格 Decoder-only 语言模型，包含预训练、指令微调、分类微调、手写 LoRA、PEFT LoRA 和推理示例。
 
 <div align="center">
-  <img src="assets/pic.png" alt="Pocket LLM" width="600"/>
+  <img src="https://github.com/aweg75006-maker/PalmLLM/blob/main/asserts/pic.png" alt="Pocket LLM" width="600"/>
 </div>
 
 ## 核心实现
